@@ -10,7 +10,7 @@ Welcome to **Gradient Picker App**, a simple and intuitive tool for HTML develop
 - 💡 Customize gradient colors, directions, and stops.
 
 ## How to Use 🚀
-1. Visit the [Gradient Picker App](https://yourgithubusername.github.io/gradient-picker-app/).
+1. Visit the [Gradient Picker App](https://janvier840.github.io/RainyBowGradients/).
 2. Select your gradient type (linear or radial).
 3. Choose your colors and adjust stops.
 4. Preview the gradient in real time.
@@ -20,5 +20,5 @@ Welcome to **Gradient Picker App**, a simple and intuitive tool for HTML develop
 If you'd like to run the app locally:
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourgithubusername/gradient-picker-app.git
+   git clone https://github.com/janvier840/RainyBowGradients.git
 
