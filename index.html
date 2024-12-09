@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Picker with Logic</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-picker {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-preview {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .mypic{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .gradient-box {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            border-radius: 15px;
+            background: linear-gradient(90deg, #9D80CB, #F8BBD0);
+            position: relative;
+            margin: 20px auto;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .expand-icon:hover {
+            color: #495057;
+        }
+        .hr{
+            width: 80%;
+            height: 3px;
+            background: #495057;
+        }
+        .social-widget {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-widget a {
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: black;
+            color: white;
+            font-size: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .social-widget a:hover {
+            transform: scale(1.1);
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1>Rainbow Gradient Generator</h1>  
+        <p>generative great gradients in for website</p>        
+    </div>
+
+
+<div class="d-flex flex-wrap justify-content-between">
+    <div class="gradient-picker container">
+        <h5 class="text-center">Gradient Picker</h5>
+        <div class="mb-4">
+            <input id="rangeSlider" type="range" class="form-range" min="0" max="100" value="50">
+        </div>
+        <div class="row gy-3">
+            <div class="col-6">
+                <label for="color1Picker" class="form-label">Color 1</label>
+                <input type="color" id="color1Picker" class="form-control form-control-color" value="#9D80CB">
+            </div>
+            <div class="col-6">
+                <label for="color2Picker" class="form-label">Color 2</label>
+                <input type="color" id="color2Picker" class="form-control form-control-color" value="#F8BBD0">
+            </div>
+            <div class="col-6">
+                <label for="rotationInput" class="form-label">Rotation</label>
+                <input id="rotationInput" type="number" class="form-control" value="90" min="0" max="360">
+            </div>
+            <div class="col-6">
+                <label for="typeInput" class="form-label">Type</label>
+                <select id="typeInput" class="form-select">
+                    <option value="linear" selected>Linear</option>
+                    <option value="radial">Radial</option>
+                </select>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <button id="randomButton" class="btn btn-outline-secondary">Random</button>
+            <button id="copyCssButton" class="btn btn-primary">Copy CSS</button>
+        </div>
+    </div>
+
+    <div class="gradient-box" id="gradientBox">
+        <i class="bi bi-arrows-fullscreen expand-icon" id="expandIcon" title="Expand"></i>
+    </div>
+
+</div>    
+<div class="footer">
+  <center><div class="hr"></div></center>  
+  <div class="person d-flex p-3 justify-content-between">
+   <div class="tyak d-flex">
+       <div class="p">
+        <img src="467581960_1082107146913143_7729535697149872279_n.jpg"  class="img mypic img-pill" alt="">
+    </div>
+    <div class="px-1">
+    <p class="p-2 px-3 d-inline">
+         <div>Done by Tyak Origy</div>
+        <button class="btn btn-outline-primary mt-1" onclick="document.location='https\:\/\/www.paypal.com/paypalme/?email=tyakorigy03@gmail.com'">buy me a coffee</button>
+    </p>        
+    </div> 
+   </div>
+   <div class="social-widget">
+    <a href="https://www.facebook.com/tyak.origy/" target="_blank" class="facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://pinterest.com" target="_blank" class="pinterest" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a>
+    <a href="https://www.instagram.com/tyakorigy/" target="_blank" class="instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+    <a href="#" target="_blank" class="paypal" aria-label="PayPal"><i class="fab fa-paypal"></i></a>
+   </div>
+  </div>
+</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Select elements
+        const rangeSlider = document.getElementById('rangeSlider');
+        const color1Picker = document.getElementById('color1Picker');
+        const color2Picker = document.getElementById('color2Picker');
+        const rotationInput = document.getElementById('rotationInput');
+        const typeInput = document.getElementById('typeInput');
+        const gradientBox = document.getElementById('gradientBox');
+        const randomButton = document.getElementById('randomButton');
+        const copyCssButton = document.getElementById('copyCssButton');
+        const expandIcon = document.getElementById('expandIcon');
+
+        // Function to update the gradient
+        function updateGradient() {
+            const color1 = color1Picker.value;
+            const color2 = color2Picker.value;
+            const rotation = rotationInput.value;
+            const gradientType = typeInput.value;
+            const position = rangeSlider.value;
+
+            const gradient =
+                gradientType === 'linear'
+                    ? `linear-gradient(${rotation}deg, ${color1} ${position}%, ${color2})`
+                    : `radial-gradient(circle, ${color1} ${position}%, ${color2})`;
+
+            gradientBox.style.background = gradient;
+        }
+
+        // Add event listeners
+        rangeSlider.addEventListener('input', updateGradient);
+        color1Picker.addEventListener('input', updateGradient);
+        color2Picker.addEventListener('input', updateGradient);
+        rotationInput.addEventListener('input', updateGradient);
+        typeInput.addEventListener('change', updateGradient);
+
+        // Randomize colors and settings
+        randomButton.addEventListener('click', () => {
+            const randomColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+            color1Picker.value = randomColor();
+            color2Picker.value = randomColor();
+            rotationInput.value = Math.floor(Math.random() * 360);
+            rangeSlider.value = Math.floor(Math.random() * 100);
+            updateGradient();
+        });
+
+        // Copy CSS to clipboard
+        copyCssButton.addEventListener('click', () => {
+            const gradientStyle = window.getComputedStyle(gradientBox).backgroundImage;
+            navigator.clipboard.writeText(`background: ${gradientStyle};`).then(() => {
+                alert('CSS copied to clipboard!');
+            });
+        });
+
+        // Handle expand icon
+        expandIcon.addEventListener('click', () => {
+            gradientBox.classList.toggle('fullscreen');
+            if (gradientBox.classList.contains('fullscreen')) {
+                gradientBox.style.position = 'absolute';
+                gradientBox.style.top = '0';
+                gradientBox.style.left = '0';
+                gradientBox.style.width = '100vw';
+                gradientBox.style.height = '100vh';
+                gradientBox.style.zIndex = '10';
+                expandIcon.classList.replace('bi-arrows-fullscreen', 'bi-arrows-collapse');
+            } else {
+                gradientBox.style.position = '';
+                gradientBox.style.width = '100%';
+                gradientBox.style.height = '300px';
+                expandIcon.classList.replace('bi-arrows-collapse', 'bi-arrows-fullscreen');
+            }
+        });
+
+        // Initialize gradient
+        updateGradient();
+    </script>
+</body>
+</html>
